@@ -19,26 +19,24 @@ module OrganizationComponent
 
       category :organization
 
-      # TODO Implement command handler block
-      # eg:
-      # handle DoSomething do |do_something|
-      #   organization_id = do_something.organization_id
+      handle Start do |start|
+        organization_id = start.organization_id
 
-      #   organization, version = store.fetch(organization_id, include: :version)
+        organization, version = store.fetch(organization_id, include: :version)
 
-      #   if organization.something_happened?
-      #     logger.info(tag: :ignored) { "Command ignored (Command: #{do_something.message_type}, Organization ID: #{organization_id})" }
-      #     return
-      #   end
+        if organization.started?
+          logger.info(tag: :ignored) { "Command ignored (Command: #{start.message_type}, Organization ID: #{organization_id})" }
+          return
+        end
 
-      #   something_happened = SomethingHappened.follow(do_something)
+        started = Started.follow(start)
 
-      #   something_happened.processed_time = clock.iso8601
+        started.processed_time = clock.iso8601
 
-      #   stream_name = stream_name(organization_id)
+        stream_name = stream_name(organization_id)
 
-      #   write.(something_happened, stream_name, expected_version: version)
-      # end
+        write.(started, stream_name, expected_version: version)
+      end
     end
   end
 end

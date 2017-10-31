@@ -3,9 +3,11 @@ module OrganizationComponent
     include Schema::DataStructure
 
     attribute :id, String
+    attribute :name, String
+    attribute :started_time, Time
 
-    # TODO Implement attributes
-    # TODO Implement entity logic, predicates, mutations, calculations, etc?
-    # Note: This class's methods should pertain to its attributes
+    def started?
+      !started_time.nil?
+    end
   end
 end
