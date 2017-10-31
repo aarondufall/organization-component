@@ -5,16 +5,15 @@ module OrganizationComponent
 
     entity_name :organization
 
-    # TODO Implement event projection blocks
-    # eg:
-    # apply SomethingHappened do |something_happened|
-    #   SetAttributes.(organization, something_happened, copy: [
-    #     { :organization_id => :id }
-    #   ])
+    apply Started do |started|
+      SetAttributes.(organization, started, copy: [
+        { :organization_id => :id },
+        :name
+      ])
 
-    #   something_happened_time = Clock.parse(something_happened.time)
+      started_time = Clock.parse(started.time)
 
-    #   organization.something_happened_time = something_happened_time
-    # end
+      organization.started_time = started_time
+    end
   end
 end

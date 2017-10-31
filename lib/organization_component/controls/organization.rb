@@ -5,13 +5,18 @@ module OrganizationComponent
         organization = OrganizationComponent::Organization.build
 
         organization.id = self.id
-        organization.something_happened_time = Time::Effective::Raw.example
+        organization.name = self.name
+        organization.started_time = Time::Effective::Raw.example
 
         organization
       end
 
       def self.id
         ID.example(increment: id_increment)
+      end
+
+      def self.name
+        'some_organization_name'
       end
 
       def self.id_increment
@@ -21,6 +26,12 @@ module OrganizationComponent
       module New
         def self.example
           OrganizationComponent::Organization.build
+        end
+      end
+
+      module Started
+        def self.example
+          Organization.example
         end
       end
 
