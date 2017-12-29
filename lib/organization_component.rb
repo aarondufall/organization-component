@@ -8,3 +8,8 @@ require 'organization_component/store'
 
 require 'organization_component/handlers/commands'
 require 'organization_component/handlers/events'
+
+require 'organization_component/consumers/commands'
+require 'organization_component/consumers/events'
+
+require 'organization_component/start'

@@ -6,6 +6,7 @@ require 'organization_component/controls/id'
 require 'organization_component/controls/time'
 require 'organization_component/controls/version'
 require 'organization_component/controls/message'
+require 'organization_component/controls/stream_name'
 
 require 'organization_component/controls/organization'
 
